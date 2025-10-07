@@ -11,6 +11,7 @@ import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
 
 
+
 const root = {
     display: "flex",
     justifyContent: "center",
@@ -47,6 +48,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           </li>
         ))}
       </Paper>
+      
       <Paper component="ul" sx={{...root}}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
@@ -59,6 +61,20 @@ const [drawerOpen, setDrawerOpen] = useState(false);
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+
+      <Paper component="ul" sx={{ ...root }}>
+  <li>
+    <Chip label="Production Countries" sx={{ ...chip }} color="primary" />
+  </li>
+
+  {
+    movie.production_countries.map((c) => (
+      <li key={c.name}>
+        <Chip label={c.name} sx={{ ...chip }} />
+      </li>
+    ))}
+</Paper>
+
       <Fab
         color="secondary"
         variant="extended"
