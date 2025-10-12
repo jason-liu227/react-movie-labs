@@ -89,7 +89,7 @@ export const getMovieImages = ({ queryKey }) => {
 
   export const getUpcomingMovie = ({ queryKey }) => {
   const [, idPart] = queryKey;
-  const id = typeof idPart === "object" ? idPart.id : idPart;
+  const { id } = idPart;
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
   )
