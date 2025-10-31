@@ -143,20 +143,43 @@ export const getUpcomingMovies = () => {
     });
 };
 
-export const getTopRatedMovies = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.status_message || "Something went wrong");
-        });
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      throw error;
-    });
+export const getTopRatedMovies = async (filter = "allTime") => {
+  const displayUrl = `https://api.themoviedb.org/3/movie/top_rated/${filter}`;
+  console.log("Fetching:", displayUrl);
+
+  let url = `https://api.themoviedb.org/3/discover/movie?api_key=${
+    import.meta.env.VITE_TMDB_KEY
+  }&language=en-US&sort_by=vote_average.desc&vote_count.gte=100`;
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+
+  switch (filter) {
+    case "thisYear":
+      url += `&primary_release_year=${year}`;
+      break;
+    case "thisMonth":
+      url += `&primary_release_date.gte=${year}-${month}-01`;
+      break;
+    case "thisWeek": {
+      const weekAgo = new Date();
+      weekAgo.setDate(now.getDate() - 7);
+      url += `&primary_release_date.gte=${weekAgo.toISOString().split("T")[0]}`;
+      break;
+    }
+    case "today":
+      url += `&primary_release_date.gte=${now.toISOString().split("T")[0]}`;
+      break;
+    default:
+      break;
+  }
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.status_message || "Something went wrong");
+  }
+  return response.json();
 };
 

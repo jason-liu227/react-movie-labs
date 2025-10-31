@@ -1,29 +1,38 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
 import { getTopRatedMovies } from "../api/tmdb-api";
 import PageTemplate from "../components/templateMovieListPage";
 import Spinner from "../components/spinner";
 import AddToFavoritesIcon from "../components/cardIcons/addToFavourites";
 
 const TopRatedMoviesPage = () => {
+  // gets the "filter" part of the route (/movies/topRated/thisYear)
+  const { filter = "allTime" } = useParams();
+
   const { data, error, isPending, isError } = useQuery({
-    queryKey: ["topRatedMovies"], 
-    queryFn: getTopRatedMovies, 
+    queryKey: ["topRatedMovies", filter], // will re-fetch automatically when filter changes
+    queryFn: () => getTopRatedMovies(filter),
   });
 
   if (isPending) return <Spinner />;
   if (isError) return <h1>{error.message}</h1>;
 
-  const movies = data.results || [];
-
-  const favorites = movies.filter((m) => m.favorite);
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-
-  const addToFavorites = (movieId) => true;
+  const movies = data?.results || [];
 
   return (
     <PageTemplate
-      title="Top Rated Movies"
+      title={`Top Rated Movies — ${
+        filter === "allTime"
+          ? "All Time"
+          : filter === "thisYear"
+          ? "This Year"
+          : filter === "thisMonth"
+          ? "This Month"
+          : filter === "thisWeek"
+          ? "This Week"
+          : "Today"
+      }`}
       movies={movies}
       action={(movie) => <AddToFavoritesIcon movie={movie} />}
     />
