@@ -28,7 +28,7 @@ const SiteHeader = () => {
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Popular Actors", path: "/actors" },
+    { label: "Popular", path: "/movies/popular" },
   ];
 
   // --- Mobile menu handlers ---
