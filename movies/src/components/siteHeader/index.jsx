@@ -27,11 +27,11 @@ const SiteHeader = () => {
   const menuOptions = [
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
+    { label: "Playlist", path: "/movies/playlist" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Popular", path: "/movies/popular" },
   ];
 
-  // --- Mobile menu handlers ---
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -43,7 +43,6 @@ const SiteHeader = () => {
     navigate(path);
   };
 
-  // --- Top Rated dropdown handlers ---
   const handleTopRatedOpen = (event) => {
     setTopRatedAnchorEl(event.currentTarget);
   };
@@ -67,7 +66,6 @@ const SiteHeader = () => {
           </Typography>
 
           {isMobile ? (
-            // ------------------- MOBILE -------------------
             <>
               <IconButton
                 aria-label="menu"
@@ -109,7 +107,6 @@ const SiteHeader = () => {
               </Menu>
             </>
           ) : (
-            // ------------------- DESKTOP -------------------
             <>
               {menuOptions.map((opt) => (
                 <Button
@@ -121,10 +118,9 @@ const SiteHeader = () => {
                 </Button>
               ))}
 
-              {/* Top Rated button with hover dropdown */}
 <div
   onMouseEnter={handleTopRatedOpen}
-  onMouseLeave={() => setTimeout(handleTopRatedClose, 200)} // small delay for smoothness
+  onMouseLeave={() => setTimeout(handleTopRatedClose, 200)}
   style={{ display: "inline-block" }}
 >
   <Button
@@ -148,7 +144,7 @@ const SiteHeader = () => {
     }}
     sx={{
       mt: 1,
-      zIndex: 1302, // ensures it's above the AppBar
+      zIndex: 1302, 
     }}
   >
   <MenuItem onClick={() => handleTopRatedSelect("allTime")}>All Time</MenuItem>
