@@ -182,4 +182,16 @@ export const getTopRatedMovies = async (filter = "allTime") => {
   }
   return response.json();
 };
+ 
+export const getMovieRecommendations = async (id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+  );
 
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.status_message || "Failed to fetch recommendations");
+  }
+
+  return response.json();
+};
