@@ -143,7 +143,7 @@ export const getUpcomingMovies = () => {
     });
 };
 
-export const getTopRatedMovies = async (filter = "allTime") => {//used Ai to troubleshoot the error for top rated
+export const getTopRatedMovies = async (filter = "allTime") => {//used Ai to troubleshoot the error for top rated - explained in detail in video
   const displayUrl = `https://api.themoviedb.org/3/movie/top_rated/${filter}`;
   console.log("Fetching:", displayUrl);
 
@@ -159,16 +159,16 @@ export const getTopRatedMovies = async (filter = "allTime") => {//used Ai to tro
     case "thisYear":
       url += `&primary_release_year=${year}`;
       break;
-    case "thisMonth":
+    case "thisMonth": //returns vary
       url += `&primary_release_date.gte=${year}-${month}-01`;
       break;
-    case "thisWeek": {
+    case "thisWeek": {//returns vary
       const weekAgo = new Date();
       weekAgo.setDate(now.getDate() - 7);
       url += `&primary_release_date.gte=${weekAgo.toISOString().split("T")[0]}`;
       break;
     }
-    case "today":
+    case "today"://returns vary
       url += `&primary_release_date.gte=${now.toISOString().split("T")[0]}`;
       break;
     default:

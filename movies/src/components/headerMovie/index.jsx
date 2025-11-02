@@ -20,6 +20,8 @@ const MovieHeader = (props) => {
             flexWrap: "wrap",
             padding: 1.5,
             margin: 0,
+            backgroundColor:"#0e4c92",
+            color:"white"
         }}
       >
       <IconButton aria-label="go back" onClick={() => navigate(-1)} >
