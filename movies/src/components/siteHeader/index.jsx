@@ -56,7 +56,11 @@ const SiteHeader = () => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <AppBar position="fixed" 
+      sx={{
+        backgroundColor:"hotpink",
+        color:"darkblue"
+      }}>
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             TMDB Client
