@@ -69,8 +69,8 @@ const MoviePage = () => {
                   <img
                     src={
                       actor.profile_path
-                        ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
-                        : "https://via.placeholder.com/200x300?text=No+Image"
+                        ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` // gets image from tmdb actors
+                        : "https://via.placeholder.com/200x300?text=No+Image" // no image to be shown
                     }
                     alt={actor.name}
                     style={{
