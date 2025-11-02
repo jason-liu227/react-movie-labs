@@ -7,7 +7,7 @@ import Spinner from "../components/spinner";
 import AddToFavoritesIcon from "../components/cardIcons/addToFavourites";
 
 const TopRatedMoviesPage = () => {
-  // gets the "filter" part of the route (/movies/topRated/thisYear)
+  // gets the "filter" part of the route eg.(/movies/topRated/thisYear)
   const { filter = "allTime" } = useParams();
 
   const { data, error, isPending, isError } = useQuery({
@@ -21,7 +21,7 @@ const TopRatedMoviesPage = () => {
   const movies = data?.results || [];
 
   return (
-    <PageTemplate
+    <PageTemplate//changes based on selected time frame
       title={`Top Rated Movies — ${
         filter === "allTime"
           ? "All Time"

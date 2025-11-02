@@ -143,7 +143,7 @@ export const getUpcomingMovies = () => {
     });
 };
 
-export const getTopRatedMovies = async (filter = "allTime") => {
+export const getTopRatedMovies = async (filter = "allTime") => {//used Ai to troubleshoot the error for top rated
   const displayUrl = `https://api.themoviedb.org/3/movie/top_rated/${filter}`;
   console.log("Fetching:", displayUrl);
 

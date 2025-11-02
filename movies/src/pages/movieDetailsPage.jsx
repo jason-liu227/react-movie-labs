@@ -14,10 +14,10 @@ const MoviePage = () => {
 
   const {data: movie, error, isPending, isError} = useQuery({
     queryKey: ["movie", { id }],
-    queryFn: () => getMovie({ queryKey: ["movie", { id }] }),
+    queryFn: () => getMovie({ queryKey: ["movie", { id }] }),//gets id
   });
 
-  const {data: recData, error: recError, isPending: recPending, isError: recIsError} = useQuery({
+  const {data: recData, error: recError, isPending: recPending, isError: recIsError} = useQuery({//for the above id, retrieves recommended movies
     queryKey: ["movieRecommendations", id],
     queryFn: () => getMovieRecommendations(id),
     enabled: !!id,
@@ -30,7 +30,8 @@ const MoviePage = () => {
 
   return (
     <>
-      {movie ? (
+      {movie ? (// recommended movies by parameter (id)
+                //movies is automatically filtered by genre, no code required (done by api)
         <>
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
